@@ -1,0 +1,147 @@
+
+module NOT(A, F);
+  input A;
+  output F;
+  reg F;
+  
+  always @ (A)
+    begin
+      F = ~A;
+    end
+endmodule
+
+module AND(A, B, F);
+  input A, B;
+  output F;
+  reg F;
+  
+  always @ (A or B)
+    begin
+      F = A & B;
+    end
+endmodule
+
+module OR(A, B, F);
+  input A, B;
+  output F;
+  reg F;
+  
+  always @ (A or B)
+    begin
+      F = A | B;
+    end
+endmodule
+
+module XOR(A, B, F);
+  input A, B;
+  output F;
+  reg F;
+  
+  always @ (A or B)
+    begin
+      F = A ^ B;
+    end
+endmodule
+
+
+module NAND(A, B, F);
+  input A, B;
+  output F;
+  reg F;
+  
+  always @ (A or B)
+    begin
+      F = ~(A & B);
+    end
+endmodule
+
+module MUX2(A, B, S, Out);
+    input A, B, S;
+    output Out;
+    reg Out;
+    
+    wire NOTS, AANDS, BANDS;
+    
+   // always @(A or B or S)
+     //   begin
+            NOT n1(S, NOTS);
+            AND a1(A, NOTS, AANDS);
+            AND a2(B, S, BANDS);
+            OR o1(AANDS, BANDS, Out);
+       // end
+endmodule
+
+module MUX4(A, B, C, D, S0, S1, Result);
+    input A, B, C, D, S0, S1;
+    output Result;
+    reg Result;
+        
+    wire AANDS0, AANDS1, BANDS0, BANDS1, CANDS0, CANDS1, DANDS0, DANDS1, S0NOT, S1NOT, OR1, OR2;
+        
+    NOT n1(S0, S0NOT);
+    NOT n2(S1, S1NOT);
+    AND a1(A, S0NOT, AANDS0);
+    AND a2(AANDS0, S1NOT, AANDS1);
+    AND a3(B, S0NOT, BANDS0);
+    AND a4(BANDS0, S1, BANDS1);
+    AND a5(C, S0, CANDS0);
+    AND a6(CANDS0, S1NOT, CANDS1);
+    AND a7(D, S0, DANDS0);
+    AND a8(DANDS0, S1, DANDS1);
+    
+    OR o1(AANDS1, BANDS1, OR1);
+    OR o2(CANDS1, DANDS1, OR2);
+    OR o3(OR1, OR2, Result);
+endmodule
+        
+
+module ADDER(A, B, Cin, Cout, Result);
+    input A, B, Cin;
+    output Cout, Result;
+    reg Cout, Result;
+    
+    wire AND1, AND2, XOR1;
+    
+    AND a1(A, B, AND1);
+    XOR x1(A, B, XOR1);
+  AND a2(XOR1, Cin, AND2);
+    XOR x2(Cin, XOR1, Result); //Result
+    OR o1(AND1, AND2, Cout); //Cout
+endmodule
+    
+module SingleAlu(A, B, Op1, Op2, Cin, Binv, Result, Cout);
+  input A, B, Op1, Op2, Cin, Binv;
+  output Result, Cout;
+  reg Result, Cout;
+  reg t = 0;
+    
+  wire NOTB, BINMUX, ORAB, ANDAB, ADDRESULT;
+    
+  NOT notB(B, NOTB);
+  MUX2 chooseB(B, NOTB, Binv, BINMUX);
+  AND aAndB(A, B, ANDAB);
+  OR aOrB(A, B, ORAB);
+  ADDER adder(A, BINMUX, Cin, Cout, ADDRESULT);
+  MUX4 m1(ANDAB, ORAB, ADDRESULT, t, Op1, Op2, Result);
+endmodule
+
+module doubleALU(A0, A1, B0, B1, Op1, Op2, Cin, Binvert, Cout, Result0, Result1, Zero);
+  input A0, A1, B0, B1, Op1, Op2, Cin, Binvert;
+  output Cout, Result0, Result1, Zero;
+  reg Cout, Result0, Result1;
+  reg t = 0;
+   
+  wire COUT0, RESULT0, RESULT1, ANDOPS;
+    
+  SingleAlu a1(A0, B0, Op1, Op2, Cin, Binvert, RESULT0, COUT0);
+  SingleAlu a2(A1, B1, Op1, Op2, COUT0, Binvert, RESULT1, Cout);
+    
+  AND and1(Op1, Op2, ANDOPS);
+  MUX2 m1(RESULT0, Cout, ANDOPS, Result0);
+  MUX2 m2(RESULT1, t, ANDOPS, Result1);
+
+  OR or1(Result0, Result1, Zero);
+    
+endmodule
+
+

@@ -1,0 +1,55 @@
+// Code your testbench here
+// or browse Examples
+
+module
+Testbench;
+reg A0, A1, B0, B1, Op1, Op2, Cin, Binvert;
+wire COUT, R1, R2, ZERO;
+  
+  doubleALU twoBit(A0, A1, B0, B1, Op1, Op2, Cin, Binvert, COUT, R1, R2, ZERO);
+  initial
+    begin
+//if you want waveform, the code goes here.
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+      
+      A0<=1; A1<=0; B0<=1; B1<=1; Op1<=0; Op2<=0; Cin<=0; Binvert<=0; 
+      #1 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+      A0<=1; A1<=0; B0<=0; B1<=1; Op1<=0; Op2<=1; Cin<=0; Binvert<=0; 
+      #2 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+      A0<=0; A1<=1; B0<=1; B1<=1; Op1<=1; Op2<=0; Cin<=0; Binvert<=0; 
+      #3 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+      A0<=1; A1<=1; B0<=1; B1<=1; Op1<=1; Op2<=0; Cin<=1; Binvert<=1; 
+      #4 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+      A0<=0; A1<=1; B0<=1; B1<=1; Op1<=1; Op2<=1; Cin<=0; Binvert<=0; 
+      #5 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+      A0<=1; A1<=1; B0<=1; B1<=1; Op1<=0; Op2<=0; Cin<=0; Binvert<=0; 
+      #6 $display ("R0 = %b", R1);
+      $display ("R1 = %b", R2);
+      $display("Cout = %b", COUT);
+      $display("Zero = %b", ZERO);
+      $display("---------------------");
+       
+  
+end
+endmodule

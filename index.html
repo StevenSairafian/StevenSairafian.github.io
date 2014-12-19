@@ -3,18 +3,113 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<div id="header">Steven Sairafian</div>
 	</head>
 	<body>
-	<div id="garageDoor"><div id="doorText">Steven Sairafian</div></div>	
+		<img src="images/Plus.png" alt="+" class="plusImage" id="img0" onclick="activate(0)">
+		<div id="education" class="title">Education
+			<div id="educationDetails" class="accordion">
+				<b>California State Polytechnic University, Pomona</b><br>
+				Bachelors of Computer Science
+				<div class="date">Dec 2015</div>
+				<br>Minor in Mathematics
+			</div>
+		</div>
+		<hr WIDTH="95%">
+		<img src="images/Plus.png" alt="+" class="plusImage" id="img1" onclick="activate(1)">
+		<div id="professionalExp" class="title">Professional Experience
+			<div id="profExpDetails" class="accordion">
+				<b>Techtonic Group</b><br>
+				<i>Independent Contractor</i>
+				<div class="date">July-Aug. (2014)</div>
+				<br>
+				<ul>
+					<li>Developed classes to serve dynamic data (C#/ASPX With tie-ins to Kentico CMS)</li>
+					<li>Produced HTML to structure pages that will support a wide range of devices</li>
+					<li>Styled pages with CSS to exactly match client provided images of desired site</li>
+				</ul>
+			</div>
+		</div>
+		<hr WIDTH="95%">
+		<img src="images/Plus.png" alt="+" class="plusImage" id="img2" onclick="activate(2)">
+		<div id="personalProjects" class="title">Personal Projects
+			<div id="persProjectsDetails" class="accordion">
+				<ul>
+					<li>Designed finite state automaton emulator (Java)
+					<li>Implemented a cut-down version of UDP on top of IPV4 encrypting all packets with AES after an RSA handshake (Java)</li>
+					<li>Created a structural 2 bit ALU capable of add, subtract, and, or, set less than, and branch equal to (Verilog)</li>
+					<li>Programmed Conways Game of Life, and designed a GUI for it (Java - Using Swing and AWT)</li>
+					<li>Implemented simulated annealing to attempt solving the n-queens problem (Java)</li>
+					<li>Controlled series of LEDs using an Arduino micro controller</li>
+				</ul>
+			</div>
+			
+		</div>
+		<hr WIDTH="95%">
+		<img src="images/Plus.png" alt="+" class="plusImage" id="img3" onclick="activate(3)">
+		<div id="relevantCoursework" class="title">Relevant Coursework
+			<div id="relCourseDetails" class="accordion">
+				<div id="courseLeft">
+					<ul>
+						<li>Data Structures and algorithms</li>
+						<li>Assembly Programming</li>
+						<li>Language Translation and Automata</li>
+						<li>Number Theory</li>
+					</ul>
+				</div>
+				<div id="courseRight">
+					<ul>
+						<li>Computer Networks</li>
+						<li>Artificial Intelligence</li>
+						<li>C++</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			var contentHeight = 0;
+			var slideTime = 250.0;
 
-	<p id="demo">Default Text.</p>
+			var currentlyOpen = [false, false, false, false];
+			var tabs =["educationDetails", "profExpDetails", "persProjectsDetails", "relCourseDetails"];
 
-	<button type="button" onclick="myFunction()">Try it</button>
+			function activate(index){
+				if(currentlyOpen[index]){
+					close(index);
+				}
+				else{
+					open(index, 0);
+				}
+			}
 
-	<script>
-		function myFunction() {
-			document.getElementById("demo").innerHTML = "JavaScript Available.";
-		}
-	</script>
+			function open(index, count){
+				var current = document.getElementById(tabs[index]);
+				if(count < 101){
+				console.log(count);
+				current.style.height = count + "%";
+				setTimeout(open(index, (count + 1)), 10000);
+				}
+				else{
+				current.style.display = "block";
+				currentlyOpen[index] = true;
+				document.getElementById("img" + index).src = "images/Minus.png";
+				return;
+				}
+			}
+			function close(index, count){
+				var current = document.getElementById(tabs[index]);
+				if(count > 0){
+				console.log(count);
+				current.style.height = count + "%";
+				setTimeout(open(index, (count - 1)), 10000);
+				}
+				else{
+				current.style.display = "none";
+				currentlyOpen[index] = false;
+					document.getElementById("img" + index).src = "images/Plus.png";
+				return;
+				}
+			}
+		</script>
 	</body>
 </html>

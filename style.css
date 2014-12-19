@@ -1,58 +1,59 @@
-#headerText{
+body{
+padding:0% 17%;
+}
+head{
+padding:0% 15%;
+}
+hr{
+margin-left:0px;
+}
+
+img{
+float:left;
+}
+
+.plusImage{
+height:1em;
+width: 1em;
+padding-top: 1em;
+}
+
+#header{
 	float: center;
-	height:50px;
+	height:5%;
 	font-family: 'Open Sans', sans-serif;
-	font-size:200%;
+	font-size:400%;
 	color:#ffffff;
 	background-color:rgba(0,0,0,0.85);
 	width:100%;
 	padding-left:1%;
+	text-align:center;
 }
-#garageDoor{
-	width:100%;
+
+.title{
+	font-size:250%;
+	padding:0% 2%;
+}
+.accordion{
+	font-size:50%;
+	padding-left:5%;
+	display: none;
 	height:0px;
-	/* Safari 5.1 to 6.0 */
-	background: -webkit-repeating-linear-gradient(rgba(120,120,120,1) 6%, rgba(90,90,90,1) 9%, rgba(60,60,60,1) 10%);
-	/* Opera 11.1 to 12.0 */
-	background: -o-repeating-linear-gradient(rgba(60,60,60,0,1), rgba(90,90,90,0,1) 10%, rgba(90,90,90,0,1) 20%);
-	/* Firefox 3.6 to 15 */
-	background: -moz-repeating-linear-gradient(rgba(90,90,90,0,1), rgba(90,90,90,0,1) 10%, rgba(90,90,90,0,1) 50%);
-	/* Standard syntax */
-	background: repeating-linear-gradient(rgba(90,90,90,0,1), rgba(90,90,90,0,1) 10%, rgba(90,90,90,0,1) 20);
-  
-	font-family: 'Open Sans', sans-serif;
-	font-size:200%;
-	color:#ffffff;
-	text-align: center;
-
-	-webkit-animation: myfirst 5s; /* Chrome, Safari, Opera */
-    animation: myfirst 5s;
-  
 }
-
-#doorText{
-	display: inline-block;
-	line-height: normal; 
-	padding-top:50%;
-	}
-	
-	/* Chrome, Safari, Opera */
-@-webkit-keyframes myfirst {
-    0%   {	height:800px;}
-    25%  {	height:600px;}
-    50%  {	height:400px;
-    100% {	height:200px;}
+ul{
+	font-size:90%;
+	padding-left:5%;
+	width:70%;
 }
-
-/* Standard syntax */
-@keyframes myfirst {
-    0%   {background: red;}
-    25%  {background: yellow;}
-    50%  {background: blue;}
-    100% {background: green;}
+.date{
+	float:right;
 }
-
-body{
-	margin:0px;
+#courseLeft{
+float:left;
+width:45%;
+padding-left: 20px;
 }
-  
+#courseRight{
+float:right;
+width:45%;
+}
