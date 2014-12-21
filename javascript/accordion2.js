@@ -6,22 +6,24 @@ var tabs =["educationDetails", "profExpDetails", "persProjectsDetails", "relCour
 function activate(index){
 	var height = $(document.getElementById(tabs[index])).height();
 	if(currentlyOpen[index]){
-		close(index);
+		close(index, height);
 	}
 	else{
 		document.getElementById(tabs[index]).style.display = "block";
 		//must recalculate height
 		height = $(document.getElementById(tabs[index])).height();
-		open(index);
+		open(index, height);
 	}
 }
-function open(index){
+function open(index, height){
 	var current = document.getElementById(tabs[index]);
 	var currentHeight = 0;
+	console.log(height);
 	function frame(){
-		currentHeight++;
-		current.style.fontSize = currentHeight + "\%";
-		if(currentHeight >=60){
+		currentHeight+=3;
+		console.log(currentHeight);
+		current.style.height = currentHeight + "px";
+		if(currentHeight >=height){
 			clearInterval(id);
 			document.getElementById("img" + index).src = "images/Minus.png";
 			currentlyOpen[index] = true;
@@ -29,14 +31,16 @@ function open(index){
 	}
 	var id = setInterval(frame, 5);
 }
-function close(index){
+function close(index, height){
 	var current = document.getElementById(tabs[index]);
-	var currentHeight = 60;
+	var currentHeight = height;
+	console.log(height);
 	function frame(){
-		currentHeight--;
-		current.style.fontSize = currentHeight + "\%";
-		if(currentHeight <=0){
-			current.style.fontSize = 0 + "\%";
+		currentHeight-=3;
+		console.log(currentHeight);
+		current.style.height = currentHeight + "px";
+		if(currentHeight <=3){
+			current.style.height = 0 + "px";
 			clearInterval(id);
 			document.getElementById("img" + index).src = "images/Plus.png";
 			currentlyOpen[index] = false;
