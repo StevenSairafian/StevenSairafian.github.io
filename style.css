@@ -38,9 +38,44 @@ ul{
 .date{
 	float:right;
 }
+.sideButton{
+	text-align:center;
+	font-size:150%;
+	padding-top:4em;
+	position:relative;
+	top: -2em;
+}
+
+.buttonText {
+	background-color:rgba(0,0,5,0.85);
+	height:1.7em;
+	color:#ffffff;
+	padding-top:.5em;
+	position:absolute;
+	width:104%;
+	z-index: 10;
+}
+.buttonText a{
+	color:#ffffff;
+	text-decoration: none;
+}
+
+#leftContainer{
+	width: 15%;
+	float:left;
+}
+
+#leftColumn{
+	float:right;
+	width:96%;
+	height:100vh;
+	background-color:rgba(0,0,5,0.75);
+	z-index: -1;
+	}
 
 #mainBody{
-	padding:1% 17%;
+	padding-top:2%;
+	padding-left: 18%;
 }
 
 #header{
@@ -49,7 +84,7 @@ ul{
 	font-family: 'Open Sans', sans-serif;
 	font-size:400%;
 	color:#ffffff;
-	background-color:rgba(0,0,0,0.85);
+	background-color:rgba(0,0,0,0.95);
 	width:100%;
 	padding-left:1%;
 	text-align:center;
